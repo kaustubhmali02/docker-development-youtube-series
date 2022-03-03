@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: secret-app
-        image: centos:7
+        image: alpine
         imagePullPolicy: Always
         ports:
         - containerPort: 5000

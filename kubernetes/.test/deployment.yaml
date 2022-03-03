@@ -51,7 +51,7 @@ spec:
 #NOTE: comment out `volumeMounts` section for configmap and\or secret guide
         volumeMounts:
         - name: secret-volume
-          mountPath: /mnt/
+          mountPath: /mnt/secret
         # - name: config-volume
         #   mountPath: /configs/
 # NOTE: comment out `volumes` section for configmap and\or secret guide

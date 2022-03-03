@@ -11,9 +11,9 @@ metadata:
   #   fluxcd.io/tag.example-app: semver:~1.0
   #   fluxcd.io/automated: 'true'    
 spec:
-  # selector:
-  #   matchLabels:
-  #     app: secret-app
+  selector:
+    matchLabels:
+      app: secret-app
   replicas: 1
   strategy:
     type: RollingUpdate

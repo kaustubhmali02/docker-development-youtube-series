@@ -28,7 +28,7 @@ spec:
       containers:
       - name: secret-app
         image: centos:7
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         # livenessProbe:

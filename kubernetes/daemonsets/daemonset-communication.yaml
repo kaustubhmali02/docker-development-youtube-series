@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: daemonset-communicate
-  namespace: default
+  namespace: daemonset-example
   labels:
     app: daemonset-communicate
 spec:
@@ -48,6 +48,7 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 80
+          hostPort: 80
           name: "http"
       terminationGracePeriodSeconds: 30
       volumes:

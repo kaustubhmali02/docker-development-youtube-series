@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: example-daemonset
-  namespace: default
+  namespace: daemonset-example
   labels:
     app: example-daemonset
 spec:

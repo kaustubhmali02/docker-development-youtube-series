@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: module-secret
+  namespace: module4assignment
+  labels:
+    app: secret-app
+    test: test
+  # annotations:
+  #   fluxcd.io/tag.example-app: semver:~1.0
+  #   fluxcd.io/automated: 'true'    
+spec:
+  selector:
+    matchLabels:
+      app: secret-app
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: secret-app
+    spec:
+      containers:
+      - name: secret-app
+        image: centos:7
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        # livenessProbe:
+        #   httpGet:
+        #     path: /status
+        #     port: 5000
+        #   initialDelaySeconds: 3
+        #   periodSeconds: 3
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      # tolerations:
+      # - key: "cattle.io/os"
+      #   value: "linux"
+      #   effect: "NoSchedule"      
+#NOTE: comment out `volumeMounts` section for configmap and\or secret guide
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /secrets/
+        # - name: config-volume
+        #   mountPath: /configs/
+# NOTE: comment out `volumes` section for configmap and\or secret guide
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: secret-volume
+      # - name: config-volume
+      #   configMap:
+      #     name: example-config #name of our configmap object

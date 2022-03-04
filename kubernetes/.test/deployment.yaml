@@ -1,4 +1,25 @@
 ---
+# Creating a Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: module4assignment
+
+---
+# Creating a secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+  namespace: module4assignment
+type: Opaque
+stringData:
+  secret.json: |-
+    {
+      "api_key" : "xyzIsthebest"
+    }
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,13 +73,14 @@ spec:
         volumeMounts:
         - name: secret-volume
           mountPath: /mnt/secret
+          readOnly: true
         # - name: config-volume
         #   mountPath: /configs/
 # NOTE: comment out `volumes` section for configmap and\or secret guide
       volumes:
       - name: secret-volume
         secret:
-          secretName: secret-volume
+          secretName: mysecret
       # - name: config-volume
       #   configMap:
       #     name: example-config #name of our configmap object
